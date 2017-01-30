@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  div.row(style="text-align:center")
+    h1.col-md-12(style="text-align:center")= title
+    p.col-md-12 Welcome to #{title}
+    button.col-md-2.col-md-offset-5.btn.btn-primary(data-target="#businessModal",data-toggle="modal") Add a Business
+
+  div.row(style="margin-top:20px")
+    if businesses
+      for business, i in businesses
+        div.col-md-10
+          div.panel.panel-default
+            div.panel-body
+              img.col-md-1(src=business.imgUrl,width="50",height="50")
+              span.col-md-3= business.name
+              span.col-md-3= business.address
+              span.col-md-3= business.state
+              span.col-md-9= business.description
+              a.btn.btn-primary(href='/business/'+ business._id) View Business
+    else
+      div No Business. Try adding
+
+    <!-- Add Business Modal -->
+    div#businessModal.modal.fade(role="dialog")
+      .modal-dialog.modal-lg
+        .modal-content
+          form(action="/business/create", method="post", encType="multipart/form-data")
+            .modal-header
+              button.close(type="button",data-dismiss="modal",aria-hidden="true") ×
+              h4#myModalLabel.modal-title
+                |Add Business Listing
+            .modal-body
+                .row
+                  .form-group
+                    label Business Name
+                    input.form-control(type="text",name="name")
+                  .form-group
+                    label Business Address
+                    input.form-control(type="text",name="address")
+                  .form-group
+                    label Business State
+                    input.form-control(type="text",name="state")
+                  .form-group
+                    label Description
+                    textarea.form-control(rows="3",name="description")
+                  .form-group
+                    label Files
+                    input.form-control(type="file",name="logo")
+
+            .modal-footer
+              button.btn.btn-primary(type="submit") Save
+              button.btn.btn-default(type="button",data-dismiss="modal") Close

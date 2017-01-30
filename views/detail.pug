@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  div.row
+    form(action='/business/'+business._id+'/delete', method="post")
+      input.btn.btn-danger.form-control(type="submit",value="Remove Listing")
+    img(src=business.imgUrl,,width="100",height="100")
+    form(action='/business/'+business._id+'/update', method="post")
+      div.col-md-12(style="text-align:center")
+        span Business Name:
+        input(type="text",style="font-weight:bold", value=business.name, name="name")
+      div.col-md-12(style="text-align:center")
+        span Business description:
+        input(type="text",style="font-weight:bold", value=business.description, name="description")
+      div.col-md-12(style="text-align:center")
+        span Business address:
+        input(type="text",style="font-weight:bold" value=business.address, name="address")
+      div.col-md-12(style="text-align:center")
+        span Business State:
+        input(type="text",style="font-weight:bold" value=business.state, name="state")
+      div.col-md-12(style="text-align:center")
+        button.btn.btn-primary(type="submit") Update Business

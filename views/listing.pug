@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.row(style="text-align:center")
+    h3.title You Searched for #{query}
+  div.row
+    if businesses
+      for business, i in businesses
+        div.col-md-10
+          img.col-md-1(src=business.imgUrl,width="50",height="50")
+          span.col-md-3= business.name
+          span.col-md-3= business.address
+          span.col-md-4= business.description
+          a.btn.btn-primary(href="/business/"+business._id) View Business
+    else
+      div
+        No Business. Try adding
